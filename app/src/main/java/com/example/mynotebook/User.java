@@ -1,7 +1,7 @@
 package com.example.mynotebook;
 
 public class User {
-    String email,password;
+    public String email,password;
 
     public User() {
 
