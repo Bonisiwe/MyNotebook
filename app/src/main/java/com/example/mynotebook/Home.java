@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -24,16 +26,16 @@ import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.zip.Inflater;
 
 public class Home extends AppCompatActivity {
 
-    DatabaseReference ref;
-    FirebaseAuth auth;
-    Button display;
 
     ListView myListv;
     ArrayList<String> mylist = new ArrayList<>();
     ArrayList<String> myl = new ArrayList<>();
+    DatabaseReference ref;
+
 
     ArrayAdapter<String> myarrayAdapter;
     @Override
@@ -44,32 +46,21 @@ public class Home extends AppCompatActivity {
         myarrayAdapter = new ArrayAdapter<String>(Home.this, android.R.layout.simple_list_item_1, mylist);
         myListv = findViewById(R.id.listview);
         myListv.setAdapter(myarrayAdapter);
-        display = findViewById(R.id.display);
-        auth = FirebaseAuth.getInstance();
 
         FloatingActionButton mFAB = findViewById(R.id.btn_new_post);
         mFAB.setOnClickListener(v -> startActivity(new Intent(this , NewPost.class)));
 
-        display.setOnClickListener(d -> {
-            String note1 ="I got school work to donn";
-            addNotes(note1);
-        });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_menu, menu);
+        return true;
     }
 
     public void addNotes(String body){
-        Post post = new Post(body, auth.getCurrentUser().getUid());
-        ref = FirebaseDatabase.getInstance().getReference("Notes");
 
-        ref.setValue(post)
-                .addOnCompleteListener(n -> {
-                   if(n.isSuccessful()){
-                       Toast.makeText(this, "Added post successfully", Toast.LENGTH_LONG).show();
-                   }
-                   else{
-                       Toast.makeText(this, "failed", Toast.LENGTH_LONG).show();
-
-                   }
-                });
         ref.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot snapshot, String previousChildName) {

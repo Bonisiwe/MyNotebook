@@ -6,4 +6,32 @@
     android:layout_height="match_parent"
     tools:context=".NewPost">
 
+    <Button
+        android:id="@+id/display"
+        android:layout_width="340dp"
+        android:layout_height="46dp"
+        android:layout_alignParentRight="true"
+        android:text="display"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.145" />
+
+    <EditText
+        android:id="@+id/newpost"
+        android:layout_width="404dp"
+        android:layout_height="91dp"
+        android:ems="10"
+        android:hint="Make a new post here"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
