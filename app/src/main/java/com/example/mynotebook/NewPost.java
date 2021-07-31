@@ -2,6 +2,7 @@ package com.example.mynotebook;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
@@ -34,18 +35,23 @@ public class NewPost extends AppCompatActivity {
 
     public void addNote(String body){
         Post post = new Post(body, auth.getCurrentUser().getUid());
-        ref = FirebaseDatabase.getInstance().getReference("Notes");
+        ref = FirebaseDatabase.getInstance().getReference("Notes").push();
+
+        String key = ref.getKey();
+        post.setPostKey(key);
 
         ref.setValue(post)
                 .addOnCompleteListener(n -> {
                     if(n.isSuccessful()){
                         Toast.makeText(this, "Added post successfully", Toast.LENGTH_LONG).show();
+                        startActivity(new Intent(this, Home.class));
                     }
                     else{
                         Toast.makeText(this, "failed", Toast.LENGTH_LONG).show();
 
                     }
                 });
+
 
     }
 }

@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -35,6 +36,7 @@ public class Home extends AppCompatActivity {
     ArrayList<String> mylist = new ArrayList<>();
     ArrayList<String> myl = new ArrayList<>();
     DatabaseReference ref;
+    FirebaseAuth auth = FirebaseAuth.getInstance();
 
 
     ArrayAdapter<String> myarrayAdapter;
@@ -45,10 +47,38 @@ public class Home extends AppCompatActivity {
 
         myarrayAdapter = new ArrayAdapter<String>(Home.this, android.R.layout.simple_list_item_1, mylist);
         myListv = findViewById(R.id.listview);
-        myListv.setAdapter(myarrayAdapter);
 
         FloatingActionButton mFAB = findViewById(R.id.btn_new_post);
         mFAB.setOnClickListener(v -> startActivity(new Intent(this , NewPost.class)));
+        ref = FirebaseDatabase.getInstance().getReference("Notes");
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        String CUid = user.getUid();
+
+            ref.addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(DataSnapshot snapshot) {
+                    //if(CUid.equals(snapshot.child("uid").toString())) {
+
+                        for (DataSnapshot ds : snapshot.getChildren()) {
+
+                            String value = (String) ds.child("body").getValue(String.class);
+                            myl.add(value);
+                        }
+
+                    //}
+                    for (int i = 0; i < myl.size(); i++) {
+                            mylist.add(myl.get(i));
+
+                    }
+                    myListv.setAdapter(myarrayAdapter);
+
+                }
+
+                @Override
+                public void onCancelled(DatabaseError error) {
+
+                }
+            });
 
     }
 
@@ -59,38 +89,5 @@ public class Home extends AppCompatActivity {
         return true;
     }
 
-    public void addNotes(String body){
-
-        ref.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot snapshot, String previousChildName) {
-                String value = snapshot.getValue(String.class);
-
-                myl.add(value);
-                mylist.add(myl.get(0));
-                myarrayAdapter.notifyDataSetChanged();
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot snapshot, String previousChildName) {
-
-            }
-
-            @Override
-            public void onChildRemoved( DataSnapshot snapshot) {
-
-            }
-
-            @Override
-            public void onChildMoved( DataSnapshot snapshot,  String previousChildName) {
-
-            }
-
-            @Override
-            public void onCancelled(DatabaseError error) {
-
-            }
-        });
-    }
 
 }
