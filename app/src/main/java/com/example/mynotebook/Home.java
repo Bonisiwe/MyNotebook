@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -23,6 +24,7 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
@@ -50,22 +52,22 @@ public class Home extends AppCompatActivity {
 
         FloatingActionButton mFAB = findViewById(R.id.btn_new_post);
         mFAB.setOnClickListener(v -> startActivity(new Intent(this , NewPost.class)));
-        ref = FirebaseDatabase.getInstance().getReference("Notes");
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         String CUid = user.getUid();
+        Query query = FirebaseDatabase.getInstance().getReference("Notes")
+                .orderByChild("uid").equalTo(CUid);
 
-            ref.addValueEventListener(new ValueEventListener() {
+
+            query.addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
-                    //if(CUid.equals(snapshot.child("uid").toString())) {
 
                         for (DataSnapshot ds : snapshot.getChildren()) {
 
                             String value = (String) ds.child("body").getValue(String.class);
                             myl.add(value);
-                        }
+                         }
 
-                    //}
                     for (int i = 0; i < myl.size(); i++) {
                             mylist.add(myl.get(i));
 
@@ -89,5 +91,21 @@ public class Home extends AppCompatActivity {
         return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.item1:
+                startActivity(new Intent(this,Home.class));
+                return true;
+            case R.id.item2:
+                startActivity(new Intent(this,Profile.class));
+                return true;
+            case R.id.item3:
+                startActivity(new Intent(this,MainActivity.class));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
 
+        }
+    }
 }
