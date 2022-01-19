@@ -62,7 +62,7 @@ public class Register extends AppCompatActivity {
         auth.createUserWithEmailAndPassword( email, password).addOnCompleteListener(task-> {
             if (task.isSuccessful()) {
 
-                User user = new User (email,password);
+                User user = new User (email,password, name);
 
                 FirebaseDatabase.getInstance().getReference("Users")
                         .child(auth.getCurrentUser().getUid())

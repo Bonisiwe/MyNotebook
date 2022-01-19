@@ -11,27 +11,41 @@
         android:layout_width="340dp"
         android:layout_height="46dp"
         android:layout_alignParentRight="true"
-        android:text="display"
+        android:text="Add Note"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.145" />
+        app:layout_constraintVertical_bias="0.305" />
 
     <EditText
         android:id="@+id/newpost"
-        android:layout_width="404dp"
-        android:layout_height="91dp"
+        android:layout_width="384dp"
+        android:layout_height="92dp"
         android:ems="10"
-        android:hint="Make a new post here"
+        android:hint="Make a new note"
         android:inputType="textPersonName"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.428"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.112" />
+
+    <EditText
+        android:id="@+id/Top_ic"
+        android:layout_width="386dp"
+        android:layout_height="52dp"
+        android:ems="10"
+        android:hint="Add Tittle"
+        android:inputType="textPersonName"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.007" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

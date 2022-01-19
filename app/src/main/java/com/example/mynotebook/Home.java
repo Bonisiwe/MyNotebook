@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListView;
@@ -37,6 +38,8 @@ public class Home extends AppCompatActivity {
     ListView myListv;
     ArrayList<String> mylist = new ArrayList<>();
     ArrayList<String> myl = new ArrayList<>();
+    ArrayList<String> myl2 = new ArrayList<>();
+
     DatabaseReference ref;
     FirebaseAuth auth = FirebaseAuth.getInstance();
 
@@ -58,29 +61,45 @@ public class Home extends AppCompatActivity {
                 .orderByChild("uid").equalTo(CUid);
 
 
-            query.addValueEventListener(new ValueEventListener() {
+            query.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot snapshot) {
 
-                        for (DataSnapshot ds : snapshot.getChildren()) {
+                    for (DataSnapshot ds : snapshot.getChildren()) {
 
-                            String value = (String) ds.child("body").getValue(String.class);
-                            myl.add(value);
-                         }
+                        String value = (String) ds.child("topic").getValue(String.class);
+                        String value2 = (String) ds.child("body").getValue(String.class);
+
+                        myl.add(value);
+                        myl2.add(value2);
+                    }
 
                     for (int i = 0; i < myl.size(); i++) {
-                            mylist.add(myl.get(i));
-
-                    }
+                        mylist.add(myl.get(i));
+                     }
                     myListv.setAdapter(myarrayAdapter);
 
+                    myListv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+                        @Override
+                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
+
+                                        //Toast.makeText(view.getContext(), myl2.get(position)+" two", Toast.LENGTH_LONG).show();
+                                        Intent intent = new Intent(view.getContext(), DisplayNote.class);
+                                        intent.putExtra("note", myl2.get(position));
+                                        startActivity(intent);
+                        }
+                    });
                 }
+
 
                 @Override
                 public void onCancelled(DatabaseError error) {
 
                 }
+
             });
+
 
     }
 

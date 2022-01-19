@@ -33,7 +33,15 @@ public class MainActivity extends AppCompatActivity {
         Login.setOnClickListener(l -> {
             String email1 = eemail1.getText().toString().trim();
             String password1 = epassword1.getText().toString().trim();
-            Login(email1, password1);
+            if(email1.isEmpty()){
+                eemail1.setError("Email not entered");
+            }
+            if(password1.isEmpty()){
+                epassword1.setError("Password not entered");
+            }
+            else {
+                Login(email1, password1);
+            }
         });
 
         toReg = findViewById(R.id.textView);

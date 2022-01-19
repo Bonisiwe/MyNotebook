@@ -4,8 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/brown"
     tools:context=".MainActivity">
 
+    <ImageView
+        android:id="@+id/imageView5"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/note3"
+        app:layout_constraintBottom_toBottomOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.073"
+        tools:layout_editor_absoluteX="23dp" />
+
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="61dp"
+        android:layout_height="62dp"
+        android:src="@drawable/ic_baseline_perm_identity_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.523" />
+
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="90dp"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        android:textColor="@color/brown"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/imageView5"
+        app:layout_constraintVertical_bias="0.404"
+        tools:ignore="MissingConstraints" />
 
     <EditText
         android:id="@+id/email1"
@@ -13,8 +51,9 @@
         android:layout_height="53dp"
         android:background="@drawable/custom_edittext"
         android:ems="10"
-        android:hint="EMAIL"
+        android:hint="Email"
         android:inputType="textEmailAddress"
+        android:textColorHint="@color/brown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.617"
@@ -27,8 +66,9 @@
         android:layout_height="52dp"
         android:background="@drawable/custom_edittext"
         android:ems="10"
-        android:hint="PASSWORD"
+        android:hint="Password"
         android:inputType="textPassword"
+        android:textColorHint="@color/brown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.724"
@@ -39,7 +79,10 @@
         android:id="@+id/textView"
         android:layout_width="209dp"
         android:layout_height="21dp"
-        android:text="Don't have an account ?Register"
+        android:text="Don't have an account?Register"
+        android:textColor="@color/brown"
+        android:textSize="13dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -51,6 +94,7 @@
         android:layout_width="266dp"
         android:layout_height="41dp"
         android:text="Login"
+        android:textColor="@color/brown"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.496"

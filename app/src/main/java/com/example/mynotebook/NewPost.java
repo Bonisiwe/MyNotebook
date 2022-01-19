@@ -14,10 +14,12 @@ import com.google.firebase.database.FirebaseDatabase;
 
 public class NewPost extends AppCompatActivity {
 
-    DatabaseReference ref;
+    DatabaseReference ref, ref2;
     FirebaseAuth auth;
     Button display;
     EditText new_post;
+    EditText topic;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,25 +27,29 @@ public class NewPost extends AppCompatActivity {
         setContentView(R.layout.activity_new_post);
 
         new_post = findViewById(R.id.newpost);
+        topic = findViewById(R.id.Top_ic);
         display = findViewById(R.id.display);
         auth = FirebaseAuth.getInstance();
         display.setOnClickListener(d -> {
             String note1 = new_post.getText().toString().trim();
-            addNote(note1);
+            String top = topic.getText().toString().trim();
+
+            addNote(note1, top);
         });
     }
 
-    public void addNote(String body){
-        Post post = new Post(body, auth.getCurrentUser().getUid());
+    public void addNote(String body, String topic){
+        Post post = new Post(body, auth.getCurrentUser().getUid(), topic);
         ref = FirebaseDatabase.getInstance().getReference("Notes").push();
+
 
         String key = ref.getKey();
         post.setPostKey(key);
 
         ref.setValue(post)
                 .addOnCompleteListener(n -> {
-                    if(n.isSuccessful()){
-                        Toast.makeText(this, "Added post successfully", Toast.LENGTH_LONG).show();
+                     if(n.isSuccessful()){
+                        Toast.makeText(this, "Added Note successfully", Toast.LENGTH_LONG).show();
                         startActivity(new Intent(this, Home.class));
                     }
                     else{
