@@ -7,6 +7,11 @@
     tools:context=".Home">
 
 
+    <include
+        android:id="@+id/tool_bar"
+        layout="@layout/toolbar" />
+
+
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_new_post"
         android:layout_width="wrap_content"
@@ -19,12 +24,16 @@
         app:rippleColor="#E1C3C3"
         app:srcCompat="@drawable/ic_add"
         app:tint="@color/white"
+        app:backgroundTint="@color/brown"
         tools:ignore="VectorDrawableCompat" />
+
 
     <ListView
         android:id="@+id/listview"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="59dp">
 
 
     </ListView>

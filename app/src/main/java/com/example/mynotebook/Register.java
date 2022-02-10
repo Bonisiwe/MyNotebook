@@ -2,9 +2,11 @@ package com.example.mynotebook;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
@@ -15,6 +17,7 @@ public class Register extends AppCompatActivity {
     FirebaseAuth auth;
     Button reg;
     EditText ename,eemail,epassword,econfirmP;
+    TextView pass;
 
 
     @Override
@@ -27,6 +30,7 @@ public class Register extends AppCompatActivity {
         eemail = findViewById(R.id.email1);
         epassword = findViewById(R.id.pass1);
         econfirmP = findViewById(R.id.passc);
+        pass = findViewById(R.id.textView3);
 
         reg = findViewById(R.id.regi);
         reg.setOnClickListener(r -> {
@@ -69,6 +73,7 @@ public class Register extends AppCompatActivity {
                         .setValue(user).addOnCompleteListener(tas -> {
                     if(tas.isSuccessful()){
                         Toast.makeText(this, "user registered", Toast.LENGTH_SHORT).show();
+                        startActivity(new Intent(this,MainActivity.class));
                     }
                     else{
                         Toast.makeText(this, "failed to register user", Toast.LENGTH_SHORT).show();

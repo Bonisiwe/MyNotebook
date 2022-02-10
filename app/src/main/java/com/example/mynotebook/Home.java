@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
+import android.widget.Toolbar;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
@@ -40,15 +41,20 @@ public class Home extends AppCompatActivity {
     ArrayList<String> myl = new ArrayList<>();
     ArrayList<String> myl2 = new ArrayList<>();
 
+    private  Toolbar toolbar;
     DatabaseReference ref;
     FirebaseAuth auth = FirebaseAuth.getInstance();
-
 
     ArrayAdapter<String> myarrayAdapter;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //toolbar =findViewById(R.id.tool_bar);
+        //setSupportActionBar(toolbar);
+
+
 
         myarrayAdapter = new ArrayAdapter<String>(Home.this, android.R.layout.simple_list_item_1, mylist);
         myListv = findViewById(R.id.listview);
@@ -124,7 +130,9 @@ public class Home extends AppCompatActivity {
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
-
         }
+
     }
+
+
 }
