@@ -31,6 +31,10 @@ public class Register extends AppCompatActivity {
         epassword = findViewById(R.id.pass1);
         econfirmP = findViewById(R.id.passc);
         pass = findViewById(R.id.textView3);
+        pass.setOnClickListener(v ->{
+            startActivity(new Intent(this,MainActivity.class));
+
+        });
 
         reg = findViewById(R.id.regi);
         reg.setOnClickListener(r -> {
