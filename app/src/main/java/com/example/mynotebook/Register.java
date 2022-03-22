@@ -45,7 +45,7 @@ public class Register extends AppCompatActivity {
             String confirmP = econfirmP.getText().toString().trim();
 
             if(name.length() == 0){
-                ename.setError("Enter your name");
+                ename.setError("Enter your username");
             }
             else if(email.length() == 0){
                 eemail.setError("Enter email");
